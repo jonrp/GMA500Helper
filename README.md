@@ -5,11 +5,9 @@ If you were unlucky enough, you may have acquired one sporting the dreaded Intel
 The available drivers were barely serviceable at the time, unsurprisingly Windows 10 didn't make them any better.
 
 You have the choice between:
-| Driver | Observations |
-| --- | --- |
-| Microsoft Basic Display Adapter Driver | Perfectly capable as all display processing is performed on the CPU, but forget about watching a video. Also on my machine (a Sony VAIO P) it doesn't allow screen backlight control. |
-| Intel Graphics Media Accelerator Driver | Artifacts, artifacts everywhere. I couldn't push myself using them for more than 5mn. |
-| Intel Embedded Media and Graphics Driver | Some minor artifacts here and there, but works alright. Allows to properly play videos, but when using them the Desktop Window Manager process crashes from time to time resulting in a black screen until the computed is restarted. |
+- **Microsoft Basic Display Adapter Driver**: Perfectly capable as all display processing is performed on the CPU, but forget about watching a video. Also on my machine (a Sony VAIO P) it doesn't allow screen backlight control.
+- **Intel Graphics Media Accelerator Driver**: Artifacts, artifacts everywhere. I couldn't push myself using them for more than 5mn.
+- **Intel Embedded Media and Graphics Driver**: Some minor artifacts here and there, but works alright. Allows to properly play videos, but when using them the Desktop Window Manager process crashes from time to time resulting in a black screen until the computed is restarted.
 
 GMA500Helper is an attempt to make the best of the situation. It provides the following workarounds:
 - Easy switching from Microsoft Basic Display Adapter Driver (software mode) to Intel Embedded Media and Graphics Driver (hardware mode)
