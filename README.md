@@ -46,7 +46,7 @@ If your main hard drive is SSD:
 
 ## Suggested software
 
-While store apps run respectably as long as they don't involve videos (most don't support hardware decoding with the GMA500) or intensive graphics (like the maps app), it is still preferable to use more lightweight old school windows applications. Here is a list of applications running well on my own --net-- pocketbook:
+While store apps run respectably as long as they don't involve videos (most don't support hardware decoding with the GMA500) or intensive graphics (like the maps app), it is still preferable to use more lightweight old school windows applications. Here is a list of applications running well on my own ~~net~~pocketbook:
 - Browser: Firefox or Edge with uBlock Origin
 - Video: VLC (using DXVA 2.0 decoding), myTube (one of the few store apps to support hardware decoding)
 - Office: MS Office desktop or app version, default Calendar / Mail / Calculator apps

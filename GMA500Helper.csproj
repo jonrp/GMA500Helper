@@ -47,18 +47,16 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GMA500Manager.cs" />
+    <Compile Include="GMA500Tray.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Runners\ConsoleRunner.cs" />
-    <Compile Include="Runners\TrayRunner.cs" />
-    <Compile Include="System\BrightnessManager.cs" />
-    <Compile Include="System\MonitorPowerManager.cs" />
-    <Compile Include="System\KeyListener.cs" />
+    <Compile Include="System\BrightnessEvents.cs" />
+    <Compile Include="System\MonitorPowerEvents.cs" />
     <Compile Include="System\ProcessWatcher.cs" />
-    <Compile Include="Tools\ConsoleProcessor.cs" />
     <Compile Include="System\DevConManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
