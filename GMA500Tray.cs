@@ -36,8 +36,10 @@ namespace GMA500Helper {
             optionsItem.DropDownItems.Add(brightnessFixItem);
             var dwmFixItem = new ToolStripMenuItem("Dwm fix", null, (s, e) => manager.DwmFixEnabled = !manager.DwmFixEnabled);
             optionsItem.DropDownItems.Add(dwmFixItem);
+            var autoRunItem = new ToolStripMenuItem("AutoRun", null, (s, e) => manager.AutorunEnabled = !manager.AutorunEnabled);
+            optionsItem.DropDownItems.Add(autoRunItem);
             contextMenu.Items.Add(optionsItem);
-            contextMenu.Items.Add(new ToolStripMenuItem("Logs", null, (s, e) => Process.Start(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "activity.log"))));
+            contextMenu.Items.Add(new ToolStripMenuItem("Logs", null, (s, e) => Process.Start(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GMA500Helper.log"))));
             contextMenu.Items.Add(new ToolStripMenuItem("Exit", null, (s, e) => Exit()));
 
             contextMenu.Opening += (o, s) => {
@@ -47,6 +49,7 @@ namespace GMA500Helper {
                 direcxaccelerationItem.Checked = manager.DirectXAccelerationEnabled;
                 brightnessFixItem.Checked = manager.BrightnessFixEnabled;
                 dwmFixItem.Checked = manager.DwmFixEnabled;
+                autoRunItem.Checked = manager.AutorunEnabled;
             };
 
             icon.ContextMenuStrip = contextMenu;

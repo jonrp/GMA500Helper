@@ -39,6 +39,14 @@ namespace GMA500Helper {
                 // TODO
             }
         }
+        public bool AutorunEnabled {
+            get {
+                return false;
+            }
+            set {
+                // TODO
+            }
+        }
 
         public MonitorPowerModes MonitorPowerMode { get; private set; }
         public byte Brightness { get; private set; }
@@ -110,8 +118,6 @@ namespace GMA500Helper {
             Logger.InfoFormat("Active driver found: {0}", ActiveDriver);
 
             Logger.InfoFormat("DirectXAcceleration is {0}", DirectXAccelerationEnabled ? "Enabled" : "Disabled");
-            Logger.InfoFormat("BrightnessFix is {0}", BrightnessFixEnabled ? "Enabled" : "Disabled");
-            Logger.InfoFormat("DwmFix is {0}", DwmFixEnabled ? "Enabled" : "Disabled");
 
             SystemEvents.PowerModeChanged += OnPowerModeChanged;
             MonitorPowerEvents.MonitorPowerModeChanged += OnMonitorPowerModeChanged;
