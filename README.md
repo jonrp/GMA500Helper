@@ -21,8 +21,8 @@ GMA500Helper is an attempt to make the best of the situation. It provides the fo
 
 ## Install and use ##
 
-Get the latest released binaries, extract them somewhere, copy **devcon.exe** over, and copy a shortcut to ****.
-GMA500Helper will now auto start and can be interacted with through its systray icon.
+Get the latest released binaries, extract them somewhere then copy **devcon.exe** over.
+You can now run GMA500Helper (it will show up in the systray) and configure autostart from the application itelf.
 
 ## Going further
 
@@ -49,8 +49,8 @@ If your main hard drive is SSD:
 While store apps run respectably as long as they don't involve videos (most don't support hardware decoding with the GMA500) or intensive graphics (like the maps app), it is still preferable to use more lightweight old school windows applications. Here is a list of applications running well on my own ~~net~~pocketbook:
 - Browser: Firefox or Edge with uBlock Origin
 - Video: VLC (using DXVA 2.0 decoding), myTube (one of the few store apps to support hardware decoding)
-- Office: MS Office desktop or app version, default Calendar / Mail / Calculator apps
-- Music: foobar2000, Spotify (by god that app is slow)
+- Office: MS Office desktop or app version, Microsoft To-Do, default Calendar / Mail / Calculator apps
+- Music: foobar2000, Spotify (note that UI responsiveness is far from stellar)
 - Pictures: IrfanView, default Photos app, Paint.net (if you are very patient)
-- Development: Notepad++, Visual Studio Code, Visual Studio 2017 Community Edition
-- Misc: Nextgen Reader, Baconit (would need some tweaks to be more keyboard friendly, I need to look into that in the future), Skype, Bing Translator, default Weather app
+- Development: Notepad++, Visual Studio Code, Visual Studio 2017
+- Misc: Nextgen Reader, Baconit (not really mouse / keyboard friendly though), Skype, Bing Translator, default Weather app

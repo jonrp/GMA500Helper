@@ -52,14 +52,7 @@
   <ItemGroup>
     <Compile Include="GMA500Manager.cs" />
     <Compile Include="GMA500Tray.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="System\BrightnessEvents.cs" />
-    <Compile Include="System\MonitorPowerEvents.cs" />
-    <Compile Include="System\ProcessWatcher.cs" />
+    <Compile Include="System\AvalonGraphicsManager.cs" />
     <Compile Include="System\DevConManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,10 +61,6 @@
     <None Include="App.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="devcon.exe">

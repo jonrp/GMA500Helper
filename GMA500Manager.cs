@@ -1,5 +1,4 @@
-﻿using GMA500Helper.Properties;
-using GMA500Helper.System;
+﻿using GMA500Helper.System;
 using log4net;
 using Microsoft.Win32;
 using System;
@@ -14,31 +13,19 @@ namespace GMA500Helper {
         public Driver ActiveDriver { get; private set; }
         public Driver SoftwareDriver { get; private set; }
         public Driver HardwareDriver { get; private set; }
-
+        
         public bool DirectXAccelerationEnabled {
             get {
                 return (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Avalon.Graphics", "DisableHWAcceleration", 0)) == 0;
             }
             set {
-                // TODO
+                if (value != DirectXAccelerationEnabled) {
+                    AvalonGraphicsManager.Set(AvalonGraphicsManager.DisableHWAcceleration, value ? 0 : 1);
+                    RestartGPU();
+                }
             }
         }
-        public bool BrightnessFixEnabled {
-            get {
-                return Settings.Default.BrightnessFix;
-            }
-            set {
-                // TODO
-            }
-        }
-        public bool DwmFixEnabled {
-            get {
-                return Settings.Default.DwmFix;
-            }
-            set {
-                // TODO
-            }
-        }
+
         public bool AutorunEnabled {
             get {
                 return false;
@@ -47,9 +34,6 @@ namespace GMA500Helper {
                 // TODO
             }
         }
-
-        public MonitorPowerModes MonitorPowerMode { get; private set; }
-        public byte Brightness { get; private set; }
 
         public void SwitchDriver(Driver driver) {
             if (!ActiveDriver.Equals(driver)) {
@@ -81,8 +65,6 @@ namespace GMA500Helper {
             }
             Logger.Error("Brightness could to be applied");
         }
-
-        private ProcessWatcher dwmWatcher;
 
         public bool Initialize() {
             Logger.Info("### Starting ###");
@@ -119,56 +101,14 @@ namespace GMA500Helper {
 
             Logger.InfoFormat("DirectXAcceleration is {0}", DirectXAccelerationEnabled ? "Enabled" : "Disabled");
 
-            SystemEvents.PowerModeChanged += OnPowerModeChanged;
-            MonitorPowerEvents.MonitorPowerModeChanged += OnMonitorPowerModeChanged;
-            BrightnessEvents.BrightnessChanged += OnBrightnessChanged;
-            dwmWatcher = new ProcessWatcher("dwm");
-            dwmWatcher.StatusUpdate += OnDwmStatusUpdate;
-
             Logger.Info("### Started  ###");
-
-            #if !DEBUG
-            if (BrightnessFixEnabled && ActiveDriver.Equals(SoftwareDriver)) {
-                ApplyBrightness();
-            }
-            #endif
 
             return true;
         }
 
-        private void OnPowerModeChanged(object sender, PowerModeChangedEventArgs e) {
-            Logger.InfoFormat("PowerMode updated to {0}", e.Mode);
-        }
-
-        private void OnMonitorPowerModeChanged(MonitorPowerModes m) {
-            Logger.InfoFormat("MonitorPowerMode updated to {0}", m);
-        }
-
-        private void OnBrightnessChanged(byte brightness) {
-            Logger.InfoFormat("Brightness updated to {0}", brightness);
-            if (BrightnessFixEnabled && ActiveDriver.Equals(SoftwareDriver)) {
-                ApplyBrightness();
-            }
-        }
-
-        private void OnDwmStatusUpdate(string name, bool running) {
-            Logger.InfoFormat("Process {0} is now {1}", name, running ? "running" : "stopped");
-            if (DwmFixEnabled && !running && ActiveDriver.Equals(HardwareDriver)) {
-                RestartGPU();
-            }
-        }
-
         public void Dispose() {
             Logger.Info("### Stopping ###");
-
-            if (dwmWatcher != null) {
-                dwmWatcher.Dispose();
-                dwmWatcher = null;
-            }
-            BrightnessEvents.BrightnessChanged -= OnBrightnessChanged;
-            MonitorPowerEvents.MonitorPowerModeChanged -= OnMonitorPowerModeChanged;
-            SystemEvents.PowerModeChanged -= OnPowerModeChanged;
-
+            
             Logger.Info("### Stopped  ###");
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using GMA500Helper.System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -24,21 +25,23 @@ namespace GMA500Helper {
             contextMenu.Items.Add(softwareItem);
             var hardwareItem = new ToolStripMenuItem("Hardware driver", null, (s, e) => manager.SwitchDriver(manager.HardwareDriver));
             contextMenu.Items.Add(hardwareItem);
+            var direcxaccelerationItem = new ToolStripMenuItem("DirectX acceleration", null, (s, e) => manager.DirectXAccelerationEnabled = !manager.DirectXAccelerationEnabled);
+            contextMenu.Items.Add(direcxaccelerationItem);
+            contextMenu.Items.Add("Reset DirectX", null, (s, e) => {
+                AvalonGraphicsManager.Reset();
+                manager.RestartGPU();
+            });
+
             contextMenu.Items.Add(new ToolStripSeparator());
+
             contextMenu.Items.Add(new ToolStripMenuItem("Restart GPU", null, (s, e) => manager.RestartGPU()));
             var brightnessItem = new ToolStripMenuItem("Apply brightness", null, (s, e) => manager.ApplyBrightness());
             contextMenu.Items.Add(brightnessItem);
+
             contextMenu.Items.Add(new ToolStripSeparator());
-            var optionsItem = new ToolStripMenuItem("Options");
-            var direcxaccelerationItem = new ToolStripMenuItem("DirectX acceleration", null, (s, e) => manager.DirectXAccelerationEnabled = !manager.DirectXAccelerationEnabled);
-            optionsItem.DropDownItems.Add(direcxaccelerationItem);
-            var brightnessFixItem = new ToolStripMenuItem("Brightness fix", null, (s, e) => manager.BrightnessFixEnabled = !manager.BrightnessFixEnabled);
-            optionsItem.DropDownItems.Add(brightnessFixItem);
-            var dwmFixItem = new ToolStripMenuItem("Dwm fix", null, (s, e) => manager.DwmFixEnabled = !manager.DwmFixEnabled);
-            optionsItem.DropDownItems.Add(dwmFixItem);
+
             var autoRunItem = new ToolStripMenuItem("AutoRun", null, (s, e) => manager.AutorunEnabled = !manager.AutorunEnabled);
-            optionsItem.DropDownItems.Add(autoRunItem);
-            contextMenu.Items.Add(optionsItem);
+            contextMenu.Items.Add(autoRunItem);
             contextMenu.Items.Add(new ToolStripMenuItem("Logs", null, (s, e) => Process.Start(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "GMA500Helper.log"))));
             contextMenu.Items.Add(new ToolStripMenuItem("Exit", null, (s, e) => Exit()));
 
@@ -47,8 +50,6 @@ namespace GMA500Helper {
                 hardwareItem.Checked = manager.ActiveDriver.Equals(manager.HardwareDriver);
                 brightnessItem.Enabled = softwareItem.Checked;
                 direcxaccelerationItem.Checked = manager.DirectXAccelerationEnabled;
-                brightnessFixItem.Checked = manager.BrightnessFixEnabled;
-                dwmFixItem.Checked = manager.DwmFixEnabled;
                 autoRunItem.Checked = manager.AutorunEnabled;
             };
 
