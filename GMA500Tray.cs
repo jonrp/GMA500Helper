@@ -25,16 +25,24 @@ namespace GMA500Helper {
             contextMenu.Items.Add(softwareItem);
             var hardwareItem = new ToolStripMenuItem("Hardware driver", null, (s, e) => manager.SwitchDriver(manager.HardwareDriver));
             contextMenu.Items.Add(hardwareItem);
-            var direcxaccelerationItem = new ToolStripMenuItem("DirectX acceleration", null, (s, e) => manager.DirectXAccelerationEnabled = !manager.DirectXAccelerationEnabled);
+            var direcxaccelerationItem = new ToolStripMenuItem("DirectX acceleration", null, (s, e) => {
+                manager.DirectXAccelerationEnabled = !manager.DirectXAccelerationEnabled;
+                if (manager.ActiveDriver.Equals(manager.HardwareDriver)) {
+                    manager.RestartGPU();
+                }
+            });
             contextMenu.Items.Add(direcxaccelerationItem);
             contextMenu.Items.Add("Reset DirectX", null, (s, e) => {
                 AvalonGraphicsManager.Reset();
-                manager.RestartGPU();
+                if (manager.ActiveDriver.Equals(manager.HardwareDriver)) {
+                    manager.RestartGPU();
+                }
             });
 
             contextMenu.Items.Add(new ToolStripSeparator());
 
-            contextMenu.Items.Add(new ToolStripMenuItem("Restart GPU", null, (s, e) => manager.RestartGPU()));
+            var restartItem = new ToolStripMenuItem("Restart GPU", null, (s, e) => manager.RestartGPU());
+            contextMenu.Items.Add(restartItem);
             var brightnessItem = new ToolStripMenuItem("Apply brightness", null, (s, e) => manager.ApplyBrightness());
             contextMenu.Items.Add(brightnessItem);
 
@@ -48,8 +56,9 @@ namespace GMA500Helper {
             contextMenu.Opening += (o, s) => {
                 softwareItem.Checked = manager.ActiveDriver.Equals(manager.SoftwareDriver);
                 hardwareItem.Checked = manager.ActiveDriver.Equals(manager.HardwareDriver);
-                brightnessItem.Enabled = softwareItem.Checked;
                 direcxaccelerationItem.Checked = manager.DirectXAccelerationEnabled;
+                restartItem.Enabled = hardwareItem.Checked;
+                brightnessItem.Enabled = softwareItem.Checked;
                 autoRunItem.Checked = manager.AutorunEnabled;
             };
 

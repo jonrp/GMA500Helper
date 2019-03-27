@@ -2,14 +2,13 @@
 
 namespace GMA500Helper.System {
     public static class AvalonGraphicsManager {
-        public const string DisableHWAcceleration = "DisableHWAcceleration";
-        
         public const string BreakOnUnexpectedErrors = "BreakOnUnexpectedErrors";
+        public const string DisableHWAcceleration = "DisableHWAcceleration";
         public const string EnableDebugControl = "EnableDebugControl";
         public const string MaxMultisampleType = "MaxMultisampleType";
         public const string RecordAvalonFile = "RecordAvalonFile";
-        public const string RPCAvalon = "RPCAvalon";
         public const string RequiredVideoDriverDate = "RequiredVideoDriverDate";
+        public const string RPCAvalon = "RPCAvalon";
         public const string SkipDriverDateCheck = "SkipDriverDateCheck";
         public const string SkipDriverCheck = "SkipDriverCheck";
         public const string UseDX9LText = "UseDX9LText";
@@ -36,14 +35,13 @@ namespace GMA500Helper.System {
         }
         
         public static void Reset() {
-            Set(DisableHWAcceleration, 1);
-
             Set(BreakOnUnexpectedErrors, 0);
+            Set(DisableHWAcceleration, 1);
             Set(EnableDebugControl, 0);
             Set(MaxMultisampleType, 0);
             Set(RecordAvalonFile, 0);
-            Set(RPCAvalon, 1);
             Set(RequiredVideoDriverDate, "1980/01/01");
+            Set(RPCAvalon, 1);
             Set(SkipDriverDateCheck, 1);
             Set(SkipDriverCheck, 1);
             Set(UseDX9LText, 0);

@@ -21,17 +21,23 @@ namespace GMA500Helper {
             set {
                 if (value != DirectXAccelerationEnabled) {
                     AvalonGraphicsManager.Set(AvalonGraphicsManager.DisableHWAcceleration, value ? 0 : 1);
-                    RestartGPU();
+                    Logger.InfoFormat("DirectXAcceleration is {0}", value ? "Enabled" : "Disabled");
                 }
             }
         }
 
         public bool AutorunEnabled {
             get {
-                return false;
+                return (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "GMA500Helper", string.Empty) == Assembly.GetExecutingAssembly().Location;
             }
             set {
-                // TODO
+                if (value != AutorunEnabled) {
+                    if (value) {
+                        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "GMA500Helper", Assembly.GetExecutingAssembly().Location);
+                    } else {
+                        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "GMA500Helper", null);
+                    }
+                }
             }
         }
 
